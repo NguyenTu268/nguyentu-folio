@@ -26,6 +26,7 @@
   width: 2.6rem;
   margin-bottom: 10px;
   transition: 0.2s ease-in;
+  vertical-align: middle;
 }
 
 .facebook i {
@@ -68,12 +69,27 @@
   background-color: $instagram;
 }
 
+.zalo img {
+  display: inline-block;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  margin: 0 5px;
+  margin-bottom: 10px;
+  transition: 0.2s ease-in;
+  vertical-align: middle;
+}
+
+.zalo:hover img {
+  filter: brightness(0.5);
+}
+
 /* Hover Transition */
 .twitter i:hover,
 .google i:hover,
 .gitlab i:hover,
-.github i:hover,
 .linkedin i:hover,
+.github i:hover,
 .facebook i:hover,
 .instagram i:hover,
 .stack-overflow i:hover,

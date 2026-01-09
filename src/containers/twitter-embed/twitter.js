@@ -1,25 +1,29 @@
-import React, {Suspense, useContext} from "react";
+import React, { Suspense, useContext, useEffect } from "react";
 import "./twitter.scss";
 import Loading from "../loading/Loading";
-import {TwitterTimelineEmbed} from "react-twitter-embed";
-import {twitterDetails} from "../../portfolio";
+import { TwitterTimelineEmbed } from "react-twitter-embed";
+import { twitterDetails } from "../../portfolio";
 import StyleContext from "../../contexts/StyleContext";
 
 const renderLoader = () => <Loading />;
 const cantDisplayError =
   "<div className='centerContent'><h2>Can't load? Check privacy protection settings</h2></div>";
 
-function timeOut() {
-  setTimeout(function () {
-    if (!document.getElementById("twitter").innerHTML.includes("iframe")) {
-      document.getElementById("twitter").innerHTML = cantDisplayError;
-    }
-  }, 10000);
-}
 var widthScreen = window.screen.width;
 
 export default function Twitter() {
-  const {isDark} = useContext(StyleContext);
+  const { isDark } = useContext(StyleContext);
+
+  useEffect(() => {
+    if (!twitterDetails.display) return;
+    const splashTimer = setTimeout(() => {
+      const twitterDiv = document.getElementById("twitter");
+      if (twitterDiv && !twitterDiv.innerHTML.includes("iframe")) {
+        twitterDiv.innerHTML = cantDisplayError;
+      }
+    }, 10000);
+    return () => clearTimeout(splashTimer);
+  }, []);
 
   if (!twitterDetails.display) {
     return null;
@@ -35,14 +39,13 @@ export default function Twitter() {
             <TwitterTimelineEmbed
               sourceType="profile"
               screenName={twitterDetails.userName}
-              options={{height: 400, width: {widthScreen}}}
+              options={{ height: 400, width: { widthScreen } }}
               placeholder={renderLoader()}
               autoHeight={false}
               borderColor="#fff"
               key={isDark ? "1" : "2"}
               theme={isDark ? "dark" : "light"}
               noFooter={true}
-              onload={timeOut()}
             />
           </div>
         </div>
