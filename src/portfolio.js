@@ -139,7 +139,7 @@ const educationInfo = {
   schools: [
     {
       schoolName: "VKU of Information and Communication Technology",
-      logo: require("./assets/images/vkuLogo.jfif"),
+      logo: require("./assets/images/vkuLogo.png"),
       subHeader: "Engineer of Computer Science",
       duration: "August 2019 - May 2024",
       desc: "Learn about programming, presentation skills",
